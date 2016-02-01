@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Toggling UI</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+
+<style>
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:5px 10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+    .menu-ui a.active {
+      background:#3887BE;
+      color:#FFF;
+      }
+      .menu-ui a.active:hover {
+        background:#3074a4;
+        }
+</style>
+<div id='map'>
+<nav class='menu-ui'>
+  <a href='#' id='grid' class='active'>Interactivity</a>
+  <a href='#' id='legend'>Legend</a>
+  <a href='#' id='zoomer' class='active'>Zoomer</a>
+  <a href='#' id='fullscreen'>Fullscreen</a>
+  <a href='#' id='attribution' class='active'>Attribution</a>
+  <a href='#' id='hash'>Hash</a>
+  <a href='#' id='geocoder'>Geocoder</a>
+  <a href='#' id='infocontrol'>Info Control</a>
+  <a href='#' id='home'>home</a>
+</nav>
+</div>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1Ijoicm9tbWFjMTAwIiwiYSI6ImNpamE4eGVmcDAwNW11bWx4MHpheXFrbzgifQ.CSu0Q35x6NjNVYfazTkabw';
+var defaulte = [[32.2668495, -110.87926399999999]];
+var map = L.mapbox.map('map', 'mapbox.streets', {attributionControl: true})
+    .setView(defaulte[0], 18);
+
+var tileLayer = L.mapbox.tileLayer('examples.npr-stations')
+    .addTo(map);
+var gridLayer = L.mapbox.gridLayer('examples.npr-stations')
+    .addTo(map);
+var gridControl = L.mapbox.gridControl(gridLayer, {follow: true})
+    .addTo(map);
+
+map.getContainer().querySelector('#grid').onclick = function() {
+    if (this.className === 'active') {
+        map.removeLayer(tileLayer);
+        map.removeLayer(gridLayer);
+        map.removeControl(gridControl);
+        this.className = '';
+    } else {
+        map.addLayer(tileLayer);
+        map.addLayer(gridLayer);
+        map.addControl(gridControl);
+        this.className = 'active';
+    }
+    return false;
+};
+
+var legend = 'Data from Robert Kieffer.';
+
+map.getContainer().querySelector('#legend').onclick = function() {
+    if (this.className === 'active') {
+        map.legendControl.removeLegend(legend);
+        this.className = '';
+    } else {
+        map.legendControl.addLegend(legend);
+        this.className = 'active';
+    }
+    return false;
+};
+
+var fullscreenControl = new L.Control.Fullscreen();
+var hash = L.hash();
+
+// Connect check boxes to ui functions
+function toggle(control, element) {
+    if (element.className === 'active') {
+        control.removeFrom(map);
+        element.className = '';
+    } else {
+        control.addTo(map);
+        element.className = 'active';
+    }
+}
+
+map.getContainer().querySelector('#zoomer').onclick = function() {
+    toggle(map.zoomControl, this);
+    return false;
+};
+
+map.getContainer().querySelector('#fullscreen').onclick = function() {
+    toggle(fullscreenControl, this);
+    return false;
+};
+
+map.getContainer().querySelector('#attribution').onclick = function() {
+    toggle(map.attributionControl, this);
+    return false;
+};
+
+map.getContainer().querySelector('#hash').onclick = function() {
+    if (this.className === 'active') {
+        hash.removeFrom(map);
+        this.className = '';
+    } else {
+        hash.init(map);
+        this.className = 'active';
+    }
+    return false;
+};
+
+var geocode = L.mapbox.geocoderControl('mapbox.places');
+
+map.getContainer().querySelector('#geocoder').onclick = function() {
+    if (this.className === 'active') {
+        
+    } else {
+        map.addControl(geocode);
+        this.className = 'active';
+    }
+    return false;
+};
+
+var home = map.setView(defaulte[0], 18);
+map.getContainer().querySelector('#home').onclick() = function()
+{
+  if (this.className === 'active') {
+        
+    } else {
+        map.addControl(home);
+        this.className = 'active';
+    }
+    return false;
+  
+};
+
+
+
+
+
+var info = L.mapbox.infoControl();
+
+map.getContainer().querySelector('#infocontrol').onclick = function() {
+    if (this.className === 'active') {
+        map.removeControl(info);
+        this.className = '';
+    } else {
+        map.addControl(info);
+        this.className = 'active';
+    }
+    return false;
+};
+</script>
+</body>
+</html>

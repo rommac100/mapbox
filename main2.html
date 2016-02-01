@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>homeButton</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<input type="button" id='inputHome' class='ui-control'  onclick="geoJsonToggle()" value="home">
+<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+<link rel='shortcut icon' href='path/to/favicon.ico' type='image/x-icon' />
+<link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #inputHome {
+  position:absolute;
+  top:70px;
+  left: 10px;
+  z-index:1000;
+  background-color: white;
+  background: url("http://findicons.com/files/icons/1580/devine_icons_part_2/128/home.png");  }
+</style>
+</head>
+<body>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
+
+<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+<div id='map'></div>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1Ijoicm9tbWFjMTAwIiwiYSI6ImNpamE4eGVmcDAwNW11bWx4MHpheXFrbzgifQ.CSu0Q35x6NjNVYfazTkabw';
+
+
+var toggle2 = 0;
+var defaulte = [[32.2668495, -110.87926399999999]];
+var defaulterev = [[-110.87926399999999, 32.2668495]];
+var pointsInterest = [[32.266907, -110.877903], [32.266928, -110.879402], [32.266389, -110.879073], [32.266311, -110.878420]];
+
+var map = L.mapbox.map('map', 'mapbox.streets')
+    .setView(defaulte[0], 18);
+
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+function homeView()
+{
+	map.setView(defaulte[0], 18);
+	geojson.setOpacity(0);
+
+}
+
+
+
+function geoJsonToggle()
+{
+    if (toggle2 == 0)
+    {
+        myLayer.setGeoJSON(geojson);
+        toggle2 =1;
+    }
+    else if (toggle2 == 1) {
+        myLayer.setGeoJSON(geojson2);
+        toggle2 =0;
+
+    }
+
+}
+var geojson2 = {
+    type: 'FeatureCollection',
+    features: [{
+        type: 'Feature',
+        properties: {
+        },
+    }]};
+
+var geojson = {
+    type: 'FeatureCollection',
+    features: [{
+        type: 'Feature',
+        properties: {
+            title: 'The Gregory School',
+            'marker-color': '#0000ff',
+            'marker-size': 'large',
+            'marker-symbol': 'town-hall',
+            url: 'https://www.gregoryschool.org/'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [pointsInterest[3][1], pointsInterest[3][0]] 
+        },
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Gym',
+            'marker-color': '#7ec9b1',
+            'marker-size': 'large',
+            'marker-symbol': 'basketball',
+            url: 'https://www.gregoryschool.org/athletics'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [pointsInterest[0][1], pointsInterest[0][0]]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Fab Lab',
+            'marker-color': '#7ec9b1',
+            'marker-size': 'large',
+            'marker-symbol': 'college',
+            url: 'https://www.gregoryschool.org/events/item/300-the-gregory-school-mit-fablab'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [pointsInterest[1][1], pointsInterest[1][0]]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Theater',
+            'marker-color': '#7ec9b1',
+            'marker-size': 'large',
+            'marker-symbol': 'theatre',
+            url: 'https://www.gregoryschool.org/academics/academics-overview/fine-arts'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [pointsInterest[2][1], pointsInterest[2][0]]
+        }
+    },
+    ]
+};
+
+myLayer.on('click', function(e) {
+    window.open(e.layer.feature.properties.url);
+});
+
+
+</script>
+</body>
+</html>

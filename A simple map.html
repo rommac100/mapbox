@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://tgshawks.net/map.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>A simple map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <script src="./A simple map_files/mapbox.js"></script>
+    <link href="./A simple map_files/mapbox.css" rel="stylesheet">
+    <style>
+        body { margin:0; padding:0;
+            background:black;
+            background-size:100% ;
+            background-image:url('https://api.mapbox.com/v4/mapbox.dark/-110.878107,32.266016,11/1280x1280.png?access_token=pk.eyJ1IjoiZGxlaWdob3UiLCJhIjoiY2lqYTk3NnNzMDA0eXVsa25ocW01eGpycSJ9.dSZrUXLLRCS8UHEr8GveKg')
+
+             }
+        #topSection{position:absolute; top:0; bottom:0; width:80%;height: 10%;opacity:0.2; }
+        #empty{position:absolute; top:0; bottom:0; width:80%;height: 5%;opacity: 0.8}
+        #mid{
+           background:darkblue;width:90%; height: 70%;
+            padding:1%;
+            position:absolute;
+            color:#ff0000;
+            top:50%;
+            left:50%;
+
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%); }
+
+
+
+        #map {
+            background: darkblue;
+            width: 90%;
+            height: 100%;
+            float:left;
+
+            position: relative;
+            color: #fff;
+
+        }
+
+        #info{position:relative;height:95%;width:8%;color:white;
+            background:#000;float:left; padding:1%;text-shadow: 2px 2px #0000ff;}
+
+
+    </style>
+</head>
+<body class="">
+
+<div id="topSection">hello</div>
+<div id="empty"></div>
+
+
+<div id="mid">
+<div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim" tabindex="0">
+
+
+<script>
+var coords = [[32.268483, -110.877692], [32.268398, -110.878268], [32.268249, -110.879065], [32.268249, -110.879065], [32.268153, -110.879575], [32.267582, -110.879599], [32.267099, -110.879625], [32.266466, -110.879499], [32.265828, -110.879436], [32.265077, -110.879436], [32.264439, -110.879098], [32.264054, -110.878217], [32.264241, -110.877267], [32.264765, -110.876299], [32.264940, -110.875364], [32.265769, -110.875635], [32.265787, -110.876505], [32.265778, -110.877170], [32.265869, -110.877511], [32.266395, -110.877513]];
+var toggle = 1;
+function opacityOff()
+    {
+      if (toggle == 1)
+      {
+      startm.setOpacity(0);
+      one.setOpacity(0);
+      two.setOpacity(0);
+      three.setOpacity(0);
+      four.setOpacity(0);
+      five.setOpacity(0);
+      six.setOpacity(0);
+      seven.setOpacity(0);
+      eight.setOpacity(0);
+      nine.setOpacity(0);
+      ten.setOpacity(0);
+      eleven.setOpacity(0);
+      twelve.setOpacity(0);
+      thirteen.setOpacity(0);
+      fourteen.setOpacity(0);
+      fifteen.setOpacity(0);
+      sixteen.setOpacity(0);
+      seventeen.setOpacity(0);
+      eighteen.setOpacity(0);
+      nineteen.setOpacity(0);
+      toggle = 0;
+    }
+     else if (toggle == 0)
+      {
+      startm.setOpacity(1);
+      one.setOpacity(1);
+      two.setOpacity(1);
+      three.setOpacity(1);
+      four.setOpacity(1);
+      five.setOpacity(1);
+      six.setOpacity(1);
+      seven.setOpacity(1);
+      eight.setOpacity(1);
+      nine.setOpacity(1);
+      ten.setOpacity(1);
+      eleven.setOpacity(1);
+      twelve.setOpacity(1);
+      thirteen.setOpacity(1);
+      fourteen.setOpacity(1);
+      fifteen.setOpacity(1);
+      sixteen.setOpacity(1);
+      seventeen.setOpacity(1);
+      eighteen.setOpacity(1);
+      nineteen.setOpacity(1);
+      toggle = 1;
+      }
+    }
+    https://api.mapbox.com/v4/mapbox.streets/-73.99,40.70,13/500x300.png?access_token=&lt;your%20access%20token&gt;
+    //ADD Map
+    var lat = 32.2660;
+    var long = -110.8778;
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZGxlaWdob3UiLCJhIjoiY2lqYTk3NnNzMDA0eXVsa25ocW01eGpycSJ9.dSZrUXLLRCS8UHEr8GveKg';
+    var map = L.mapbox.map('map', 'mapbox.comic')
+            .setView([32.266016, -110.878107], 16);
+
+    var myPosition = L.marker([lat, long]).addTo(map);
+
+    //ADD Markers
+    addMarkers();
+
+    //ADD Polyline
+    var polyline = L.polygon([]).addTo(map);
+    addPoly();
+
+    //turn on Tracking your coordinate
+    tracker();
+
+
+    //***Functions *****///
+    //*******************************//
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showPosition(position) {
+
+        myPosition.setLatLng(L.latLng(position.coords.latitude, position.coords.longitude));
+        tracker();
+    }
+
+    function tracker() {
+
+      window.setTimeout(getLocation, 1000);
+    }
+
+var startm;
+var stage1;
+var one;
+var two;
+var three;
+var four;
+var five;
+var six;
+var seven;
+var eight;
+var nine;
+var ten;
+var eleven;
+var twelve;
+var thirteen;
+var fourteen;
+var fifteen;
+var sixteen;
+var seventeen;
+var eighteen;
+var nineteen;
+
+    function addMarkers() {
+        //Adds Markers
+        startm = L.marker([32.267279, -110.877579], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'school',
+                'marker-color': '#fa0'
+            })
+        });
+      startm.addTo(map);
+      startm.bindPopup("START");
+
+
+        stage1=L.marker([32.267926, -110.877549], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        });
+        stage1.addTo(map);
+        stage1.bindPopup("stage1");
+        stage1.setOpacity(0.5);
+        stage1.on('click', function(e) {
+            stage1.setOpacity(1.0);
+        });
+
+        one = L.marker(coords[0], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+         two = L.marker(coords[1], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+       three = L.marker(coords[2], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+       four = L.marker(coords[3], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+
+      five = L.marker(coords[4], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+
+
+       six = L.marker(coords[5], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+        seven = L.marker(coords[6], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+       eight = L.marker(coords[7], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+        nine = L.marker(coords[8], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+        ten = L.marker(coords[9], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+       eleven = L.marker(coords[10], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+       twelve =  L.marker(coords[11], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+      thirteen = L.marker(coords[12], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+      fourteen = L.marker(coords[13], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+      fifteen =  L.marker(coords[14], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+      sixteen = L.marker(coords[15], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+      seventeen = L.marker(coords[16], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+
+      eighteen =  L.marker(coords[17], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+
+      nineteen = L.marker(coords[18], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'large',
+                'marker-symbol': 'bus',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+    }
+
+    function addPoly(){
+    polyline.addLatLng(
+            L.latLng(32.267279, -110.877579));
+    polyline.addLatLng(
+            L.latLng(32.267926, -110.877549));
+    polyline.addLatLng(
+            L.latLng(32.268483, -110.877692));
+    polyline.addLatLng(
+            L.latLng(32.268398, -110.878268));
+    polyline.addLatLng(
+            L.latLng(32.268249, -110.879065));
+    polyline.addLatLng(
+            L.latLng(32.268153, -110.879575));
+    polyline.addLatLng(
+            L.latLng(32.267582, -110.879599));
+    polyline.addLatLng(
+            L.latLng(32.267099, -110.879625));
+    polyline.addLatLng(
+            L.latLng(32.266466, -110.879499));
+    polyline.addLatLng(
+            L.latLng(32.265828, -110.879436));
+    polyline.addLatLng(
+            L.latLng(32.265077, -110.879436));
+    polyline.addLatLng(
+            L.latLng(32.264439, -110.879098));
+    polyline.addLatLng(
+            L.latLng(32.264054, -110.878217));
+    polyline.addLatLng(
+            L.latLng(32.264241, -110.877267));
+    polyline.addLatLng(
+            L.latLng(32.264765, -110.876299));
+    polyline.addLatLng(
+            L.latLng(32.264940, -110.875364));
+    polyline.addLatLng(
+            L.latLng(32.265769, -110.875635));
+    polyline.addLatLng(
+            L.latLng(32.265787, -110.876505));
+    polyline.addLatLng(
+            L.latLng(32.265778, -110.877170));
+    polyline.addLatLng(
+            L.latLng(32.265869, -110.877511));
+    polyline.addLatLng(
+            L.latLng(32.266395, -110.877513));}
+
+
+    var featureLayer = L.mapbox.featureLayer().addTo(map);
+
+    map.on('click', function(ev) {
+        var c = ev.latlng;
+
+        var geojson = [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [c.lng, c.lat]
+                },
+                "properties": {
+                    "marker-color": "#ff8888"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [myPosition.getLatLng()['lng'], myPosition.getLatLng()['lat']],
+                        [c.lng, c.lat]
+                    ]
+                },
+                "properties": {
+                    "stroke": "#000",
+                    "stroke-opacity": 0.5,
+                    "stroke-width": 4
+                }
+            }
+        ];
+
+        featureLayer.setGeoJSON(geojson);
+
+        var container = document.getElementById('distancePanel');
+        container.innerHTML = "Distance away: <br>"+myPosition.getLatLng().distanceTo(c).toFixed(0) + 'm';
+    });
+
+    function homeView()
+    {
+        map.setView([lat,long], 16);
+    }
+</script><div class="leaflet-map-pane" style="transform: translate3d(-41px, -53px, 0px);"><div class="leaflet-tile-pane"><div class="leaflet-layer"><div class="leaflet-tile-container leaflet-zoom-animated"></div><div class="leaflet-tile-container leaflet-zoom-animated"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53112@2x.png" style="height: 256px; width: 256px; left: 224px; top: 87px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53112@2x(1).png" style="height: 256px; width: 256px; left: 480px; top: 87px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53113@2x.png" style="height: 256px; width: 256px; left: 224px; top: 343px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53113@2x(1).png" style="height: 256px; width: 256px; left: 480px; top: 343px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53111@2x.png" style="height: 256px; width: 256px; left: 224px; top: -169px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53112@2x(2).png" style="height: 256px; width: 256px; left: 736px; top: 87px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53111@2x(1).png" style="height: 256px; width: 256px; left: 480px; top: -169px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53113@2x(2).png" style="height: 256px; width: 256px; left: -32px; top: 343px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53112@2x(3).png" style="height: 256px; width: 256px; left: -32px; top: 87px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53113@2x(3).png" style="height: 256px; width: 256px; left: 736px; top: 343px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53114@2x.png" style="height: 256px; width: 256px; left: 224px; top: 599px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53114@2x(1).png" style="height: 256px; width: 256px; left: 480px; top: 599px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53114@2x(2).png" style="height: 256px; width: 256px; left: -32px; top: 599px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53111@2x(2).png" style="height: 256px; width: 256px; left: -32px; top: -169px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53111@2x(3).png" style="height: 256px; width: 256px; left: 736px; top: -169px;"><img class="leaflet-tile leaflet-tile-loaded" src="./A simple map_files/53114@2x(3).png" style="height: 256px; width: 256px; left: 736px; top: 599px;"></div></div></div><div class="leaflet-objects-pane"><div class="leaflet-shadow-pane"><img src="./A simple map_files/marker-shadow.png" class="leaflet-marker-shadow leaflet-zoom-animated" style="margin-left: -12px; margin-top: -41px; width: 41px; height: 41px; transform: translate3d(247px, 273px, 0px);"></div><div class="leaflet-overlay-pane"><svg class="leaflet-zoom-animated" width="1462" height="1291" viewBox="-305 -253 1462 1291" style="transform: translate3d(-305px, -253px, 0px);"><g><path stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" stroke="#0033ff" stroke-opacity="0.5" stroke-width="5" fill="#0033ff" fill-opacity="0.2" class="leaflet-clickable" d="M405 228L407 156L394 95L340 104L219 131L214 248L226 317L232 388L232 470L263 541L345 583L434 563L524 505L611 486L586 394L505 392L443 393L411 383L411 325z"></path></g><g><path stroke-linejoin="round" stroke-linecap="round" stroke="#000" stroke-opacity="0.5" stroke-width="4" fill="none" class="leaflet-clickable" d="M248 275L590 397"></path></g></svg></div><div class="leaflet-marker-pane"><img src="./A simple map_files/marker-icon-2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -12px; margin-top: -41px; width: 25px; height: 41px; transform: translate3d(247px, 273px, 0px); z-index: 273;"><img src="./A simple map_files/pin-l-school+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(405px, 228px, 0px); z-index: 228;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(407px, 156px, 0px); z-index: 156; opacity: 0.5;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(394px, 95px, 0px); z-index: 95;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(340px, 104px, 0px); z-index: 104;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(266px, 121px, 0px); z-index: 121;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(219px, 131px, 0px); z-index: 131;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(216px, 194px, 0px); z-index: 194;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(214px, 248px, 0px); z-index: 248;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(226px, 317px, 0px); z-index: 317;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(232px, 388px, 0px); z-index: 388;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(232px, 470px, 0px); z-index: 470;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(263px, 541px, 0px); z-index: 541;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(345px, 583px, 0px); z-index: 583;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(434px, 563px, 0px); z-index: 563;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(524px, 505px, 0px); z-index: 505;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(611px, 486px, 0px); z-index: 486;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(586px, 394px, 0px); z-index: 394;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(505px, 392px, 0px); z-index: 392;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(443px, 393px, 0px); z-index: 393;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(411px, 383px, 0px); z-index: 383;"><img src="./A simple map_files/pin-l-bus+fa0@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -17.5px; margin-top: -45px; width: 35px; height: 90px; transform: translate3d(411px, 325px, 0px); z-index: 325;"><img src="./A simple map_files/pin-m+ff8888@2x.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -15px; margin-top: -35px; width: 30px; height: 70px; transform: translate3d(590px, 397px, 0px); z-index: 397;"></div><div class="leaflet-popup-pane"></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="http://tgshawks.net/map.html#" title="Zoom in">+</a><a class="leaflet-control-zoom-out" href="http://tgshawks.net/map.html#" title="Zoom out">-</a></div></div><div class="leaflet-top leaflet-right"><div class="leaflet-control-grid map-tooltip leaflet-control" style="display: none;"><a class="close" href="http://tgshawks.net/map.html#" title="close">close</a><div class="map-tooltip-content"></div></div></div><div class="leaflet-bottom leaflet-left"><div class="mapbox-logo leaflet-control mapbox-logo-true"></div></div><div class="leaflet-bottom leaflet-right"><div class="map-legends wax-legends leaflet-control" style="display: none;"></div><div class="leaflet-control-attribution leaflet-control"><a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="https://openstreetmap.org/about/" target="_blank">© OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#mapbox.comic/-110.877/32.266/17" target="_blank">Improve this map</a></div></div></div>
+</div>
+
+
+<div id="info">
+    <input type="button" id="inputHome" value="Home" onclick="homeView()">
+    <br>
+    <span id="distancePanel">Distance away: <br>367m</span>
+
+</div>
+
+</div> <!---Ends Midddle section-->
+
+
+
+</body></html>
